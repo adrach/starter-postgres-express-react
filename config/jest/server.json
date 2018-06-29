@@ -1,0 +1,15 @@
+{
+  "rootDir": "../../src-server",
+  "collectCoverageFrom": [
+    "<rootDir>/**/*.{js,jsx,mjs}"
+  ],
+  "testMatch": [
+    "<rootDir>/**/__tests__/**/*.js",
+    "<rootDir>/**/?(*.)(spec|test).js"
+  ],
+  "testEnvironment": "node",
+  "moduleFileExtensions": [
+    "js",
+    "json"
+  ]
+}

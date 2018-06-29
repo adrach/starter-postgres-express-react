@@ -12,6 +12,8 @@ class PostTable extends React.Component {
     this.fetchPosts = this.fetchPosts.bind(this);
     this.getByID = this.getByID.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    if (process.env.NODE_ENV === 'test') return;
+    // Continue initialization for non-test environments
     this.fetchPosts();
   }
 

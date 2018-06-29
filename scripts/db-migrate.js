@@ -8,12 +8,22 @@ const dir = './migrations';
 const migrationsTable = 'migrations';
 const migrationsSchema = schema;
 
-// Execute the migrations
-migrate.default({
-  databaseUrl,
-  migrationsTable,
-  migrationsSchema,
-  schema,
-  direction,
-  dir
-});
+function main() {
+  // Execute the migrations
+  console.log("Running the migrations...");
+  return migrate.default({
+    databaseUrl,
+    migrationsTable,
+    migrationsSchema,
+    schema,
+    direction,
+    dir
+  });
+}
+
+
+if (require.main === module) {
+  main();
+} else {
+  module.exports = main;
+}

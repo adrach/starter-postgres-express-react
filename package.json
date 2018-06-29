@@ -1,6 +1,6 @@
 {
-  "name": "node-expresss-postgres-react-starter",
-  "version": "0.4.0",
+  "name": "node-express-postgres-react-starter",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
@@ -37,6 +37,7 @@
     "massive": "^5.0.0",
     "morgan": "^1.9.0",
     "node-pg-migrate": "^3.5.1",
+    "nodemon": "^1.17.5",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -48,6 +49,7 @@
     "react-dom": "^16.4.1",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
+    "supertest": "^3.1.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
@@ -56,27 +58,30 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "client": "node scripts/start-client.js",
-    "server": "node scripts/start-server.js",
-    "start": "node scripts/start-server-production.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm run server:prod",
     "build": "node scripts/build.js && npm run lint",
     "lint": "eslint server/**/*.js",
+    "seed": "npm run db:seed",
+    "client:dev": "node scripts/start-client-dev.js",
+    "server:dev": "nodemon --watch src-server scripts/start-server-dev.js",
+    "server:prod": "node scripts/start-server-prod.js",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "pg-migrate": "node-pg-migrate",
-    "migrate": "node scripts/db-migrate",
-    "seed": "npm run migrate && node scripts/db-seed.js",
-    "test-client": "node scripts/test-client.js --env=jsdom"
+    "db:migrate": "node scripts/db-migrate",
+    "db:seed": "npm run db:migrate && node scripts/db-seed.js",
+    "test:client": "node scripts/test.js --env=jsdom",
+    "test:server": "node scripts/test.js --config=config/jest/server.json"
   },
   "jest": {
     "collectCoverageFrom": [
-      "client-src/**/*.{js,jsx,mjs}"
+      "src-client/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/client-src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/client-src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/src-client/**/__tests__/**/*.{js,jsx,mjs}",
+      "<rootDir>/src-client/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
@@ -110,7 +115,8 @@
     "extends": "airbnb",
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "jest": true
     },
     "rules": {
       "comma-dangle": "off",

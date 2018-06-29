@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 const http = require('http');
-const app = require('../src-server/app');
+const App = require('../src-server/app');
 
 function main() {
-  app().then((app) => {
+  App().then((app) => {
     // Function for normalizing a port into a number, string, or false.
     function normalizePort(val) {
       const port = parseInt(val, 10);
