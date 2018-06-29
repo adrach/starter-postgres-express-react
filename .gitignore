@@ -6,8 +6,8 @@
 # testing
 /coverage
 
-# production
-/build
+# public (output folder)
+/public
 
 # misc
 .DS_Store
