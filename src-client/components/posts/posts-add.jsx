@@ -28,7 +28,7 @@ class PostAdd extends React.Component {
     const { refreshTable } = this.props;
     if (!post) return;
     if (editMode) {
-      API.put('api/posts', post)
+      API.put(`/api/posts/${post.id}`, post)
         .then((res) => {
           refreshTable();
           console.log(res);

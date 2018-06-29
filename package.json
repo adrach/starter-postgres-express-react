@@ -1,6 +1,6 @@
 {
   "name": "node-expresss-postgres-react-starter",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
@@ -28,6 +28,7 @@
     "express": "^4.16.3",
     "express-promise-router": "^3.0.2",
     "extract-text-webpack-plugin": "3.0.2",
+    "faker": "^4.1.0",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
@@ -35,6 +36,7 @@
     "jest": "20.0.4",
     "massive": "^5.0.0",
     "morgan": "^1.9.0",
+    "node-pg-migrate": "^3.5.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -56,9 +58,13 @@
   "scripts": {
     "client": "node scripts/start-client.js",
     "server": "node scripts/start-server.js",
+    "start": "node scripts/start-server-production.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && npm run lint",
     "lint": "eslint server/**/*.js",
+    "pg-migrate": "node-pg-migrate",
+    "migrate": "node scripts/db-migrate",
+    "seed": "npm run migrate && node scripts/db-seed.js",
     "test-client": "node scripts/test-client.js --env=jsdom"
   },
   "jest": {
@@ -129,8 +135,5 @@
       "target": "http://localhost:5000/",
       "ws": false
     }
-  },
-  "devDependencies": {
-    "node-pg-migrate": "^3.5.1"
   }
 }

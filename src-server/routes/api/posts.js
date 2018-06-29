@@ -31,7 +31,7 @@ module.exports = (app) => {
 
   // Delete
   router.delete('/:id(\\d+)', async (req, res) => {
-    const data = await posts.update(req.params.id, req.body);
+    const data = await posts.delete(req.params.id);
     res.json(data);
   });
 

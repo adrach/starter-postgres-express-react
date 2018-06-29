@@ -11,14 +11,10 @@ module.exports = (app) => {
   };
 
   // Get all
-  module.get = async () => {
-    posts.find({});
-  };
+  module.get = async () => posts.find();
 
   // Get one
-  module.getOne = async (id) => {
-    posts.findOne({ id });
-  };
+  module.getOne = async id => posts.findOne({ id });
 
   // Update
   module.update = async (id, row) => {
