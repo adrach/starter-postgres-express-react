@@ -1,8 +1,8 @@
-# Starter Full-Stack JS Project: Express + React + Postgres
+# Starter Full-Stack JS Project: Postgres + Express + React + Node (PERN)
 
 ## Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), then ejected and customized.
+The frontend was added from a bootstrapped React project [Create React App](https://github.com/facebookincubator/create-react-app), then ejected and customized.
 The backend was added from a bootstrapped Express project [Express Generator](https://expressjs.com/en/starter/generator.html)
 
 ## Folder Structure
@@ -33,11 +33,12 @@ Before installing, please make sure to have global installations of
 2. Update the DB configuration in `config/db.js`
 3. Perform DB initialization/migration and seeding `npm run seed`
 4. Start the development server `npm run dev`
-5. (if needed) build the production version `npm run build`
+5. Build the production version `npm run build`
 
 
 ## Usage
 This application uses npm scripts for testing, development, and deployment.
+Note that the pre-commit hook runs the build script which compiles FE and lints BE code.
 ### Primary
 * `$ npm run start`: run the production version of the app
 * `$ npm run build`: build the production bundle of the FE app (linting is automatically executed), and perform linting of the BE code

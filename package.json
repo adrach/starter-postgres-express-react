@@ -1,6 +1,6 @@
 {
-  "name": "node-express-postgres-react-starter",
-  "version": "0.5.0",
+  "name": "starter-postgres-express-react",
+  "version": "0.6.0",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
@@ -72,6 +72,7 @@
     "test:client": "node scripts/test.js --env=jsdom",
     "test:server": "node scripts/test.js --config=config/jest/server.json"
   },
+  "pre-commit": "build",
   "jest": {
     "collectCoverageFrom": [
       "src-client/**/*.{js,jsx,mjs}"
@@ -141,5 +142,8 @@
       "target": "http://localhost:5000/",
       "ws": false
     }
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
   }
 }
