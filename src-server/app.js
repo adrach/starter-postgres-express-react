@@ -2,8 +2,10 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const passport = require('passport');
 const DB = require('./db.js');
 const apiPosts = require('./routes/api/posts');
+const apiAuth = require('./routes/auth');
 
 module.exports = async () => {
   const app = express();
@@ -24,11 +26,15 @@ module.exports = async () => {
   // Enable CORS
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
   });
 
+  passport.use(require('./components/auth/local')(app));
+  passport.use(require('./components/auth/jwt')(app));
+
+  app.use('/auth', apiAuth(app));
   app.use('/api', apiPosts(app));
 
   /*

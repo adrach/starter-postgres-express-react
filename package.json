@@ -34,11 +34,16 @@
     "html-webpack-plugin": "2.29.0",
     "http-errors": "^1.6.3",
     "jest": "20.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
     "massive": "^5.0.0",
     "morgan": "^1.9.0",
     "node-pg-migrate": "^3.5.1",
     "nodemon": "^1.17.5",
     "object-assign": "4.1.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
@@ -47,6 +52,7 @@
     "react": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^5.0.0",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "supertest": "^3.1.0",
@@ -139,6 +145,10 @@
   },
   "proxy": {
     "/api": {
+      "target": "http://localhost:5000/",
+      "ws": false
+    },
+    "/auth": {
       "target": "http://localhost:5000/",
       "ws": false
     }

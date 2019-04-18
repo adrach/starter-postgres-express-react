@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 const faker = require('faker');
 const DB = require('../src-server/db');
+const auth = require('../src-server/components/auth/helpers');
 
 const tablePosts = 'posts';
+const tableUsers = 'users';
 
 const createRecordPost = (db, table, id) => {
   console.log('Inserting record #', id, '...');
@@ -31,9 +33,22 @@ function seedPosts(db) {
   return Promise.all(records);
 }
 
+function seedUsers(db) {
+  console.log('Seeding [users]...');
+  const users = [{
+    email: 'user@test.com',
+    password: auth.createHash('password'),
+    firstName: 'Test',
+    lastName: 'User'
+  }];
+
+  return db[tableUsers].insert(users);
+}
+
 function seed(db) {
   // Run seeding functions
   return seedPosts(db)
+    .then(() => seedUsers(db))
     .then(() => {
       console.log('Successfully completed the seeding process');
     });
@@ -45,6 +60,8 @@ function clearDB(db) {
   // Clear [posts] and restart the sequence
   return db[tablePosts].destroy({})
     .then(() => db.query('ALTER SEQUENCE posts_id_seq RESTART WITH 1'))
+    .then(() => db[tableUsers].destroy({}))
+    .then(() => db.query('ALTER SEQUENCE users_id_seq RESTART WITH 1'))
     .then(() => {
       console.log('Successfully cleared the DB');
     });
