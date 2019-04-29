@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 const http = require('http');
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+require('../config/env');
 const App = require('../src-server/app');
 
 function main() {

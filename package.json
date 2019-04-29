@@ -1,6 +1,6 @@
 {
   "name": "starter-postgres-express-react",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
@@ -76,9 +76,14 @@
     "db:migrate": "node scripts/db-migrate",
     "db:seed": "npm run db:migrate && node scripts/db-seed.js",
     "test:client": "node scripts/test.js --env=jsdom",
-    "test:server": "node scripts/test.js --config=config/jest/server.json"
+    "test:server": "node scripts/test.js --config=config/jest/server.json",
+    "update-version": "npm --no-git-tag-version version patch"
   },
-  "pre-commit": "build",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run update-version && git add package.json package-lock.json"
+    }
+  },
   "jest": {
     "collectCoverageFrom": [
       "src-client/**/*.{js,jsx,mjs}"
@@ -154,6 +159,6 @@
     }
   },
   "devDependencies": {
-    "pre-commit": "^1.2.2"
+    "husky": "^2.1.0"
   }
 }

@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 const faker = require('faker');
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+require('../config/env');
+
 const DB = require('../src-server/db');
 const auth = require('../src-server/components/auth/helpers');
 

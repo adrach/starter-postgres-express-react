@@ -1,10 +1,7 @@
-// TODO: move the credentials into .env
-let connectionStr = '';
-if (process.env.NODE_ENV === 'test') {
-  connectionStr = 'postgres://user:password!@www.solwey.com/db-test?ssl=true';
-} else {
-  connectionStr = 'postgres://user:password!@www.solwey.com/db-dev?ssl=true';
-}
+const hostWithPort = `${process.env.DB_HOST}${process.env.DB_PORT ? `:${process.env.DB_PORT}` : ''}`;
+let connectionStr = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${hostWithPort}/${process.env.DB_NAME}`;
+if (process.env.DB_ENABLE_SSL) connectionStr += '?ssl=true';
+
 const schema = 'public';
 
 module.exports = {

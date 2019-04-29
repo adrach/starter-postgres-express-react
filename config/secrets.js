@@ -1,3 +1,3 @@
 module.exports = {
-  jwt: '<SOLWEY-JWT-SECRET>',
+  jwt: process.env.JWT_SECRET,
 };
