@@ -42,8 +42,8 @@ function seedUsers(db) {
   const users = [{
     email: 'user@test.com',
     password: auth.createHash('password'),
-    firstName: 'Test',
-    lastName: 'User'
+    firstName: 'User',
+    lastName: 'Test'
   }];
 
   return db[tableUsers].insert(users);

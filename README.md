@@ -18,6 +18,7 @@ app/
   src-server/
   package.json
   README.md
+  .env.example
 ```
 
 
@@ -30,7 +31,7 @@ Before installing, please make sure to have global installations of
 
 ## Installation
 1. Execute `npm install` to configure the local environment.
-2. Update the DB configuration in `config/db.js`
+2. Create `.env` file and define environmental variables (see `.env.example` for example)
 3. Perform DB initialization/migration and seeding `npm run seed`
 4. Start the development server `npm run dev`
 5. Build the production version `npm run build`
@@ -39,6 +40,7 @@ Before installing, please make sure to have global installations of
 ## Usage
 This application uses npm scripts for testing, development, and deployment.
 Note that the pre-commit hook runs the build script which compiles FE and lints BE code.
+
 ### Primary
 * `$ npm run start`: run the production version of the app
 * `$ npm run build`: build the production bundle of the FE app (linting is automatically executed), and perform linting of the BE code
@@ -47,6 +49,7 @@ Note that the pre-commit hook runs the build script which compiles FE and lints 
 * `$ npm run dev`: run the development version of the app
 * `$ npm run test:client`: run FE tests using Jest
 * `$ npm run test:server`: run BE tests using Jest
+
 ### Secondary
 * `$ npm run client:dev`: run Webpack dev server for FE development
 * `$ npm run server:dev`: run the development version of BE
@@ -55,8 +58,62 @@ Note that the pre-commit hook runs the build script which compiles FE and lints 
 * `$ npm run db:migrate`: run DB migration scripts
 * `$ npm run db:seed`: alias of `seed`
 
+## Authentication Endpoints (/auth/*)
+This project uses JWT for authentication.
 
-## BE API Endpoints (/api/*)
+### `POST /auth/login`: Authenticate User
+This endpoint authenticates a user. An example of the payload (input data) is provided below:
+```
+body: {
+    email   : String,  /* required */
+    password: String,  /* required */
+}
+```
+The output returns JWT token and user object:
+```
+let response = {
+    statusCode: 200,
+    body: {
+        token  : String,
+        user   : Object,
+    }
+}
+```
+
+### `POST /auth/register`: Register New User
+This endpoint registers a new user. An example of the payload (input data) is provided below:
+```
+body: {
+    email    : String,    /* required */
+    firstName: String,    /* required */
+    lastName : String,    /* required */
+    password : String,    /* required */
+}
+```
+The output is the same as from `POST /auth/login`
+
+### `GET /auth/me`: Get Current User
+This endpoint returns the User object associated with the currently authenticated user. No input data is required
+The output is provided is an object with the following structure:
+```
+let response = {
+    statusCode: 200,
+    body: {
+        id       : Number,
+        email    : String,
+        firstName: String,
+        lastName : String,
+        createdAt: Date,
+    }
+}
+```
+
+### Seed data (sample user)
+```
+Email: user@test.com
+Password: password
+```
+## API Endpoints (/api/*)
 
 ### `POST /api/posts`: Create a New Post
 This endpoint creates a new record. An example of the payload (input data) is provided below:
@@ -65,18 +122,19 @@ body: {
     author : String,    /* required */
     content: Text,      /* required */
     title  : String     /* required */
-    }
+}
 ```
 The output echos back the provided data with the system-generated record ID:
 ```
 let response = {
     statusCode: 200,
     body: {
-        id     : Number,    /* required */
-        author : String,    /* required */
-        content: Text,      /* required */
-        title  : String     /* required */
+        id     : Number,
+        author : String,
+        content: Text,
+        title  : String,
     }
+}
 ```
 
 ### `GET /api/posts`: Get all Posts
