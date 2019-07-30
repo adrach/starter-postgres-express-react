@@ -21,21 +21,19 @@ const createStore = WrappedComponent => (
     render() {
       return (
         <StoreContext.Provider value={this.state}>
-          <WrappedComponent {...this.props} />
+          <WrappedComponent store={this.state} {...this.props} />
         </StoreContext.Provider>
       );
     }
   });
 
 const withStore = WrappedComponent => (
-  class extends React.Component {
-    render() {
-      return (
-        <StoreContext.Consumer>
-          {context => <WrappedComponent store={context} {...this.props} />}
-        </StoreContext.Consumer>
-      );
-    }
+  function Wrapper(props) {
+    return (
+      <StoreContext.Consumer>
+        {context => <WrappedComponent store={context} {...props} />}
+      </StoreContext.Consumer>
+    );
   }
 );
 

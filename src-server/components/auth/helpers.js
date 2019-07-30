@@ -22,19 +22,20 @@ function signUser(user) {
 }
 
 function authenticate(req, res, next) {
-  passport.authenticate('jwt', { session: false }, (err, user) => {
-    if (err || !user) {
-      return res.status(401).json({ message: 'Unauthorized' });
+  passport.authenticate('jwt', { session: false }, (err1, user) => {
+    if (err1 || !user) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
     }
 
-    req.logIn(user, { session: false }, (err) => {
-      if (err) {
-        res.send(err);
+    req.logIn(user, { session: false }, (err2) => {
+      if (err2) {
+        res.send(err2);
       } else {
         next();
       }
     });
-  })(req, res)
+  })(req, res);
 }
 
 module.exports = {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const faker = require('faker');
+const _ = require('lodash');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 require('../config/env');
@@ -10,26 +11,27 @@ const auth = require('../src-server/components/auth/helpers');
 const tablePosts = 'posts';
 const tableUsers = 'users';
 
-const createRecordPost = (db, table, id) => {
-  console.log('Inserting record #', id, '...');
-  return db[table].insert({
-    title: faker.commerce.product(),
-    author: faker.internet.userName(),
-    content: faker.lorem.text()
-  });
-};
+const createRecordPost = (db, table, user) => db[table].insert({
+  title: faker.commerce.product(),
+  author: faker.internet.userName(),
+  content: faker.lorem.text(),
+  user_id: user.id,
+});
 
 function openDB() {
   console.log('Connecting to the DB...');
   return DB();
 }
 
-function seedPosts(db) {
+function seedPosts(db, users) {
   // Seed with fake data
   console.log('Seeding [posts]...');
   const records = [];
   try {
-    for (let i = 1; i <= 10; i += 1) records.push(createRecordPost(db, tablePosts, i));
+    for (let i = 1; i <= 10; i += 1) {
+      const user = users[_.random(users.length - 1)];
+      records.push(createRecordPost(db, tablePosts, user));
+    }
   } catch (e) {
     console.error(e);
   }
@@ -51,8 +53,8 @@ function seedUsers(db) {
 
 function seed(db) {
   // Run seeding functions
-  return seedPosts(db)
-    .then(() => seedUsers(db))
+  return seedUsers(db)
+    .then(users => seedPosts(db, users))
     .then(() => {
       console.log('Successfully completed the seeding process');
     });

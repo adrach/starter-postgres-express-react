@@ -5,7 +5,7 @@ const seed = require('../scripts/db-seed');
 const App = require('./app');
 
 describe('Run basic server tests', () => {
-  var app = {};
+  let app = {};
 
   // Run migrations, clear DB, then seeding
   beforeAll(async () => {
@@ -26,7 +26,5 @@ describe('Run basic server tests', () => {
     return expect(typeof db).toBe('object');
   });
 
-  it('should respond 200 to the [GET /]', () => {
-    return request(app).get('/').expect(200);
-  });
+  it('should respond 200 to the [GET /]', () => request(app).get('/').expect(200));
 });

@@ -8,6 +8,11 @@ import API from '../api/api';
 
 // Define the main app
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
   componentDidMount() {
     const { store } = this.props;
     if (!store.get('user')) {
@@ -15,13 +20,11 @@ class Header extends React.Component {
         store.set('user', data);
       });
     }
-
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogout() {
     const { store } = this.props;
-    store.set('user', null);
+    store.set('user', {});
     localStorage.removeItem('token');
   }
 
@@ -35,7 +38,7 @@ class Header extends React.Component {
           <h1 className="App-title">
             Welcome to React. This demo was modified to include &lt;POSTS&gt; module
           </h1>
-          {user && (
+          {user && user.id && (
             <p>
               {'Hello, '}
               {user.firstName}
@@ -44,17 +47,17 @@ class Header extends React.Component {
             </p>
           )}
           <div className="d-flex justify-content-center">
-            {!user && (
+            {!user.id && (
               <Link to="/sign_in" className="btn btn-success mr-2">
                 Sign In
               </Link>
             )}
-            {!user && (
+            {!user.id && (
               <Link to="/sign_up" className="btn btn-success mr-2">
                 Sign Up
               </Link>
             )}
-            {user && (
+            {user && user.id && (
               <button type="button" onClick={this.handleLogout} className="btn btn-danger">
                 Logout
               </button>

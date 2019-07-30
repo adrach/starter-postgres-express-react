@@ -18,10 +18,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-// Watch unless on CI or in coverage mode
 const argv = process.argv.slice(2);
-if (!process.env.CI && argv.indexOf('--coverage') < 0) {
-  argv.push('--watch');
-}
 
 jest.run(argv);

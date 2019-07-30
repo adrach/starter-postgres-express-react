@@ -4,17 +4,21 @@ module.exports = (app) => {
   const module = {};
 
   // Create
-  module.create = async (row) => {
+  module.create = async (user, row) => {
     if (!row) throw new Error('No row data given');
     delete row.id;
-    return posts.save(row);
+    return posts.save({ ...row, user_id: user.id });
   };
 
   // Get all
-  module.get = async () => posts.find();
+  module.get = async () => db.query('select p.*, u.email as author from posts p left join users u ON p.user_id=u.id');
 
   // Get one
-  module.getOne = async id => posts.findOne({ id });
+  module.getOne = async id => db.query(
+    'select p.*, u.email as author from posts p left join users u ON p.user_id=u.id where p.id=$1',
+    [id],
+    { single: true }
+  );
 
   // Update
   module.update = async (id, row) => {

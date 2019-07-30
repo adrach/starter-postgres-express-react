@@ -116,10 +116,9 @@ Password: password
 ## API Endpoints (/api/*)
 
 ### `POST /api/posts`: Create a New Post
-This endpoint creates a new record. An example of the payload (input data) is provided below:
+This endpoint creates a new Post with current user as author. An example of the payload (input data) is provided below:
 ```
 body: {
-    author : String,    /* required */
     content: Text,      /* required */
     title  : String     /* required */
 }
@@ -130,9 +129,9 @@ let response = {
     statusCode: 200,
     body: {
         id     : Number,
-        author : String,
         content: Text,
         title  : String,
+        user_id: Number,
     }
 }
 ```

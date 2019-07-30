@@ -1,6 +1,6 @@
 {
   "name": "starter-postgres-express-react",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.2.6",
@@ -9,7 +9,7 @@
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.5",
-    "babel-preset-airbnb": "^3.2.1",
+    "babel-preset-airbnb": "^2.6.0",
     "babel-runtime": "6.26.0",
     "bootstrap": "^4.3.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
@@ -66,7 +66,7 @@
   "scripts": {
     "start": "npm run server:prod",
     "build": "node scripts/build.js && npm run lint",
-    "lint": "eslint server/**/*.js",
+    "lint": "eslint 'src-client/**/*.{js,jsx}' 'src-server/**/*.js'",
     "seed": "npm run db:seed",
     "client:dev": "node scripts/start-client-dev.js",
     "server:dev": "nodemon --watch src-server scripts/start-server-dev.js",
@@ -133,6 +133,7 @@
     "rules": {
       "comma-dangle": "off",
       "no-console": "off",
+      "global-require": "off",
       "jsx-a11y/label-has-for": [
         "error",
         {
@@ -160,6 +161,6 @@
     }
   },
   "devDependencies": {
-    "husky": "^2.3.0"
+    "husky": "^3.0.2"
   }
 }

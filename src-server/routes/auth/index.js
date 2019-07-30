@@ -8,17 +8,18 @@ module.exports = (app) => {
   const users = require('../../components/users')(app);
 
   router.post('/login', (req, res) => {
-    passport.authenticate('local', { session: false }, (err, user, info) => {
-      if (err || !user) {
-        return res.status(401).json({ message: 'Unauthorized' });
+    passport.authenticate('local', { session: false }, (err1, user) => {
+      if (err1 || !user) {
+        res.status(401).json({ message: 'Unauthorized' });
+        return;
       }
 
-      req.logIn(user, { session: false }, (err) => {
-        if (err) {
-          res.send(err);
+      req.logIn(user, { session: false }, (err2) => {
+        if (err2) {
+          res.send(err2);
         } else {
           const token = auth.signUser(user);
-          return res.json({user, token});
+          res.json({ user, token });
         }
       });
     })(req, res);
@@ -31,12 +32,10 @@ module.exports = (app) => {
 
     const user = await users.create(params);
     const token = auth.signUser(user);
-    return res.json({user, token});
+    return res.json({ user, token });
   });
 
-  router.get('/me', auth.authenticate, (req, res) => {
-    return res.json(req.user);
-  });
+  router.get('/me', auth.authenticate, (req, res) => res.json(req.user));
 
   return router;
 };
