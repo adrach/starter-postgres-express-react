@@ -34,6 +34,7 @@ module.exports = async () => {
   passport.use(require('./components/auth/local')(app));
   passport.use(require('./components/auth/jwt')(app));
 
+  app.get('/', (req, res) => res.json({ status: 'ok' }));
   app.use('/auth', apiAuth(app));
   app.use('/api', apiPosts(app));
 

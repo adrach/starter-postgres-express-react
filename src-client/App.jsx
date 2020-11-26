@@ -55,5 +55,4 @@ App.propTypes = {
   store: PropTypes.object.isRequired
 };
 
-
 export default createStore(App);

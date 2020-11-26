@@ -17,33 +17,11 @@ class PostTable extends React.Component {
     this.fetchPosts();
   }
 
-  getByID() {
-    const { filter } = this.state;
-    console.log(filter);
-    API.get(`/api/posts/${filter}`)
-      .then((res) => {
-        if (res.data) this.setState({ posts: [res.data] });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  fetchPosts() {
-    API.get('/api/posts')
-      .then((res) => {
-        this.setState({ posts: res.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   handleEditPost(event, id) {
     event.preventDefault();
     const { sendToEdit } = this.props;
     const { posts } = this.state;
-    sendToEdit(posts.find(p => p.id === id));
+    sendToEdit(posts.find((p) => p.id === id));
   }
 
   handleRemovePost(event, id) {
@@ -66,9 +44,31 @@ class PostTable extends React.Component {
     });
   }
 
+  getByID() {
+    const { filter } = this.state;
+    console.log(filter);
+    API.get(`/api/posts/${filter}`)
+      .then((res) => {
+        if (res.data) this.setState({ posts: [res.data] });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  fetchPosts() {
+    API.get('/api/posts')
+      .then((res) => {
+        this.setState({ posts: res.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     const { posts, filter } = this.state;
-    const listItems = posts.map(item => (
+    const listItems = posts.map((item) => (
       <tr key={item.id}>
         <th scope="row">
           {item.id}
@@ -84,10 +84,10 @@ class PostTable extends React.Component {
         </td>
         <td>
           <div className="btn-group" role="group" aria-label="">
-            <button type="button" className="btn btn-warning" onClick={e => this.handleEditPost(e, item.id)}>
+            <button type="button" className="btn btn-warning" onClick={(e) => this.handleEditPost(e, item.id)}>
               Edit
             </button>
-            <button type="button" className="btn btn-danger" onClick={e => this.handleRemovePost(e, item.id)}>
+            <button type="button" className="btn btn-danger" onClick={(e) => this.handleRemovePost(e, item.id)}>
               Remove
             </button>
           </div>

@@ -14,7 +14,7 @@ module.exports = (app) => {
   module.get = async () => db.query('select p.*, u.email as author from posts p left join users u ON p.user_id=u.id');
 
   // Get one
-  module.getOne = async id => db.query(
+  module.getOne = async (id) => db.query(
     'select p.*, u.email as author from posts p left join users u ON p.user_id=u.id where p.id=$1',
     [id],
     { single: true }

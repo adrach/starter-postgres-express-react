@@ -14,14 +14,6 @@ class PostAdd extends React.Component {
     this.updateAction = this.updateAction.bind(this);
   }
 
-  updateAction(post) {
-    if (post) {
-      this.setState({ post, editMode: true });
-    } else {
-      this.setState({ post: { title: '', content: '' }, editMode: false });
-    }
-  }
-
   handleAddPost(event) {
     event.preventDefault();
     const { editMode, post } = this.state;
@@ -52,6 +44,14 @@ class PostAdd extends React.Component {
     const { post } = this.state;
     post[event.target.id] = event.target.value;
     this.setState({ post });
+  }
+
+  updateAction(post) {
+    if (post) {
+      this.setState({ post, editMode: true });
+    } else {
+      this.setState({ post: { title: '', content: '' }, editMode: false });
+    }
   }
 
   render() {
@@ -91,8 +91,7 @@ class PostAdd extends React.Component {
                     <button type="button" className="btn btn-warning" onClick={() => this.updateAction()}>
                       Close
                     </button>
-                    )
-              }
+                    )}
             </div>
           </form>
         </div>

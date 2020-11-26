@@ -14,8 +14,8 @@ module.exports = (app) => {
   module.get = async () => users.find();
 
   // Get one
-  module.getOne = async id => users.findOne({ id });
-  module.getOneByEmail = async email => users.findOne({ email });
+  module.getOne = async (id) => users.findOne({ id });
+  module.getOneByEmail = async (email) => users.findOne({ email });
 
   // Update
   module.update = async (id, row) => {

@@ -6,8 +6,13 @@
 # testing
 /coverage
 
-# public (output folder)
+# public
 /public
+
+# build (output folder)
+/build
+
+.eslintcache
 
 # misc
 .idea

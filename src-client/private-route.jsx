@@ -8,12 +8,11 @@ const PrivateRoute = ({ store, component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props => (user && user.id ? (
+      render={(props) => (user && user.id ? (
         <Component {...props} />
       ) : (
         <Redirect to={{ pathname: '/sign_in' }} />
-      ))
-      }
+      ))}
     />
   );
 };

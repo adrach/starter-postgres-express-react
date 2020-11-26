@@ -2,13 +2,13 @@
 import React from 'react';
 
 const StoreContext = React.createContext();
-const createStore = WrappedComponent => (
+const createStore = (WrappedComponent) => (
   class extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         // eslint-disable-next-line react/destructuring-assignment
-        get: key => this.state[key],
+        get: (key) => this.state[key],
         set: (key, value) => {
           this.setState({ [key]: value });
         },
@@ -27,11 +27,11 @@ const createStore = WrappedComponent => (
     }
   });
 
-const withStore = WrappedComponent => (
+const withStore = (WrappedComponent) => (
   function Wrapper(props) {
     return (
       <StoreContext.Consumer>
-        {context => <WrappedComponent store={context} {...props} />}
+        {(context) => <WrappedComponent store={context} {...props} />}
       </StoreContext.Consumer>
     );
   }

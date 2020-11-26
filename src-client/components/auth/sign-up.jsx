@@ -21,8 +21,8 @@ class SignUp extends React.Component {
     const { user, formErrors } = this.state;
     const { history, store } = this.props;
 
-    Object.keys(user).forEach(field => this.validateField(field));
-    const hasErrors = Object.values(formErrors).filter(e => e).length;
+    Object.keys(user).forEach((field) => this.validateField(field));
+    const hasErrors = Object.values(formErrors).filter((e) => e).length;
 
     if (!user || hasErrors) return;
     API.post('auth/register', user)
