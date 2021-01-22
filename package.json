@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "autoprefixer": "7.2.6",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "babel-core": "6.26.3",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -35,7 +35,7 @@
     "http-errors": "^1.7.2",
     "jest": "20.0.4",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "massive": "^5.10.0",
     "morgan": "^1.9.1",
     "node-pg-migrate": "^3.21.1",
