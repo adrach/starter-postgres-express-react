@@ -1,7 +1,8 @@
+process.env.NODE_ENV = 'test';
+
 const request = require('supertest');
 const migrate = require('../scripts/db-migrate');
 const seed = require('../scripts/db-seed');
-
 const App = require('./app');
 
 describe('Run basic server tests', () => {
