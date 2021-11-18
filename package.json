@@ -14,7 +14,7 @@
     "babel-preset-airbnb": "^5.0.0",
     "bfj": "^7.0.2",
     "bootstrap": "^4.5.3",
-    "browserslist": "^4.16.1",
+    "browserslist": "^4.16.5",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "concurrently": "^5.3.0",
